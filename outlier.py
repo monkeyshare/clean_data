@@ -11,13 +11,16 @@ def filter_extreme_MAD(series,n=3):
     max_range=median+n*new_median
     min_range=median-n*new_median
     return np.clip(series,min_range,max_range)
-def filter_extreme_3sigma(a,n=2):
+def filter_extreme_3sigma(a,n=2,max_ignore=500):
     '''
     3sigma
+    max_ignore:
+    n:
     '''
-    series=pd.Series(a)
-    mean=series.mean()
-    std=series.std()
+    if max(a)<=max_ignore:
+        n=n+2
+    mean=np.mean(a)
+    std=np.std(a)
     max_range=mean+n*std
     min_range=mean-n*std
     b=[]
@@ -26,16 +29,11 @@ def filter_extreme_3sigma(a,n=2):
             b.append(i)
     result={}
     for position,i in enumerate(a):
-        if i>min_range and i<max_range:
+        if i<max_range:
             result[position]=i
-        elif i<min_range:
-            result[position]=np.min(b)
         elif i>=max_range:
-            result[position]=np.max(b)
+            result[position]=round(np.mean(b),2)
     return list(result.values())
-            
-        
-    return result
 def filter_extreme_percentile(series,min=0.025,max=0.975):
     series=series.sort_values()
     q=series.quantile([min,max])
