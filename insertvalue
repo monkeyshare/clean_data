@@ -1,0 +1,20 @@
+import numpy as np
+import math
+import pandas as pd
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import pymysql 
+from scipy.optimize import curve_fit #拟合曲线
+from scipy import interpolate
+x=np.linspace(0,10,11)
+xnew=np.linspace(0,10,101)
+y=np.sin(x)
+for kind in ["nearest", "zero", "slinear", "quadratic", "cubic"]:  # 插值方式
+    # "nearest","zero"为阶梯插值
+    # slinear 线性插值
+    # "quadratic","cubic" 为2阶、3阶B样条曲线插值
+    f = interpolate.interp1d(x, y, kind=kind)
+    # ‘slinear’, ‘quadratic’ and ‘cubic’ refer to a spline interpolation of first, second or third order)
+    ynew = f(xnew)
+    print(kind,y)
+    print(ynew)
