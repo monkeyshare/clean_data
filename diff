@@ -1,0 +1,52 @@
+def get_diff(js):
+    '''
+    一阶差分
+    :param js:
+    :return:
+    '''
+    diff=[]
+    for cat in pd.value_counts(js['catId']).index:
+        max_sales= max(js[js['catId']==cat]['sales'])
+        if max_sales>1000:
+            g=js[js['catId']==cat].sort_values('rank')
+            x=list(g['rank'])
+            dic_rank=dict(zip(g['rank'],g['sales']))
+            dic_1={}
+            for r in dic_rank:
+                try:
+                    y_1=dic_rank[r]-dic_rank[r+1]
+                    if y_1 !=0:
+                        dic_1[r]=y_1
+                except:
+                    continue
+            # 插值方式kind :["nearest", "zero", "slinear", "quadratic", "cubic"]
+            f=interpolate.interp1d(list(dic_1.keys()),list(dic_1.values()),kind="nearest")
+            x_new=[i for i in x if i<max(dic_1.keys())]
+            y_1new=f(x_new)
+            dic_diff={k:diff for k,diff in zip(x_new,y_1new)}
+            for rank in x:
+                if rank in dic_diff:
+                    diff.append([cat,rank,dic_diff[rank]])
+                else:
+                    diff.append([cat,rank,0])
+    return  pd.DataFrame(diff,columns=['catId','rank','diff'])
+def clean_diff(t_diff):
+    cleandiff = []
+    catIds = pd.value_counts(t_diff['catId']).index
+    for cat in catIds:
+        g = t_diff[t_diff['catId'] == cat].sort_values('rank')
+        diffs = {r: d for r, d in zip(g['rank'], g['diff'])}
+        for r in diffs:
+            rank = r
+            diff = diffs[r]
+            try:
+                diff2 = diffs[r] - diffs[r + 1]
+                if diff2 < 0:
+                    diff = diffs[r + 1]
+                    cleandiff.append([cat, rank, diff])
+                else:
+                    cleandiff.append([cat, rank, diff])
+            except:
+                cleandiff.append([cat, rank, diff])
+                continue
+    return pd.DataFrame(cleandiff, columns=['catId', 'rank', 'diff'])   
