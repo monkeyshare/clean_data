@@ -1,0 +1,69 @@
+#https://www.jianshu.com/p/9893a8eac77c
+import numpy as np
+
+#定义节点,node为非叶子节点，leaf为叶子节点
+node={"name":"","children":[]}
+leaf={"name":"","size":0}
+result=[]
+#第一次遍历，计算IP的所有第一个数值的种类并生成Node节点
+ip1Num=[]
+for d in np.array(catt):
+    catid,lv,name1,name2,name3,name4,name=d
+    if name1 not in ip1Num:
+        ip1Num.append(name1)
+        node={"name":name1,"children":[]}
+        result.append(node)
+#第二次遍历，计算IP前两位的不同种类并生成Node节点归到第一次遍历对应的结果中
+ip2Num=[]
+for d in np.array(catt):
+    catid,lv,name1,name2,name3,name4,name=d
+    if (name2 not in ip2Num) and name3:
+        ip2Num.append(name2)
+        node={"name":name2,"children":[]}
+        for i in result:
+            if i["name"]==name1:
+                i["children"].append(node)
+                break
+    elif (name2 not in ip2Num) and (name3==0):
+        ip2Num.append(name2)
+        leaf={"name":name2,"size":0}
+        for i in result:
+            if i["name"]==name1:
+                i["children"].append(leaf)
+#第三次遍历，计算IP前三位的不同种类并生成Node节点归到第二次遍历对应的结果中
+ip3Num=[]
+for d in np.array(catt):
+    catid,lv,name1,name2,name3,name4,name=d
+    if name3:
+        if (name3 not in ip3Num) and name4:
+            ip3Num.append(name3)
+            node={"name":name3,"children":[]}
+            for i in result:
+                if i["name"]==name1:
+                    for j in i["children"]:
+                        if j["name"]==name2:
+                            j["children"].append(node)
+                            break
+        if (name3 not in ip3Num) and (name4==0):
+            ip3Num.append(name3)
+            leaf={"name":name3,"size":0}
+            for i in result:
+                if i["name"]==name1:
+                    for j in i["children"]:
+                        if j["name"]==name2:
+                            j["children"].append(leaf)
+                            break
+        
+#第四次遍历，计算IP所有位的不同种类并生成leaf节点归到上一次遍历对应的结果中
+for d in np.array(catt):
+    catid,lv,name1,name2,name3,name4,name=d
+    if name4:
+        leaf={"name":name4,"size":0}
+        for i in result:
+            if i["name"]==name1:
+                for j in i["children"]:
+                    if j["name"]==name2:
+                        for k in j["children"]:
+                            if k["name"]==name3:
+                                k["children"].append(leaf)
+                                break
