@@ -1,0 +1,23 @@
+bool: {filter: [{range: {price: {gte: 10}}}, {range: {price: {lte: 20}}}, {range: {rank: {gte: 100}}},…]}
+filter: [{range: {price: {gte: 10}}}, {range: {price: {lte: 20}}}, {range: {rank: {gte: 100}}},…]
+0: {range: {price: {gte: 10}}}
+1: {range: {price: {lte: 20}}}
+2: {range: {rank: {gte: 100}}}
+3: {range: {rank: {lte: 500}}}
+4: {bool: {must_not: [{match_phrase: {stat_time: {query: 0}}}]}}
+5: {terms: {productType: [0, 1, 2, 3]}}
+terms: {productType: [0, 1, 2, 3]}
+6: {bool: {must_not: [{match_phrase: {variant_display: {query: "false"}}}]}}
+7: {terms: {category: ["1055398"]}}
+
+GET product/_search
+{
+  "query": {"bool":{
+    "filter":[
+      {"range": {"publish_date":{"lte":1485741707}}},
+    {"range": {"est_sales":{"gte":10}}},
+    {"terms":{"productType":[0,1,2,3]}}
+    ]
+    }
+    }
+  }
