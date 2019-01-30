@@ -1,0 +1,7 @@
+import pymongo
+
+client=pymongo.MongoClient('localhost',27017)
+db=client['amazons']
+post=db['newindex']
+item={'asin':"test","index":30}
+post.update({'asin':item['asin']},{'$set':dict(item)},True)
