@@ -1,14 +1,20 @@
 bool: {filter: [{range: {price: {gte: 10}}}, {range: {price: {lte: 20}}}, {range: {rank: {gte: 100}}},…]}
-filter: [{range: {price: {gte: 10}}}, {range: {price: {lte: 20}}}, {range: {rank: {gte: 100}}},…]
-0: {range: {price: {gte: 10}}}
-1: {range: {price: {lte: 20}}}
-2: {range: {rank: {gte: 100}}}
-3: {range: {rank: {lte: 500}}}
-4: {bool: {must_not: [{match_phrase: {stat_time: {query: 0}}}]}}
-5: {terms: {productType: [0, 1, 2, 3]}}
-terms: {productType: [0, 1, 2, 3]}
-6: {bool: {must_not: [{match_phrase: {variant_display: {query: "false"}}}]}}
-7: {terms: {category: ["1055398"]}}
+filter: [{bool: {should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]}},…]
+0: {bool: {should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]}}
+bool: {should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]}
+should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]
+0: {bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}}
+1: {bool: {must: [{match: {desc: {query: "tool", operator: "and"}}}]}}
+2: {bool: {must: [{match: {about: {query: "tool", operator: "and"}}}]}}
+1: {range: {price: {gte: 10}}}
+2: {range: {price: {lte: 20}}}
+3: {range: {rank: {gte: 100}}}
+4: {range: {rank: {lte: 500}}}
+5: {bool: {must_not: [{match_phrase: {stat_time: {query: 0}}}]}}
+6: {terms: {productType: [0, 1, 2, 3]}}
+7: {bool: {must_not: [{match_phrase: {variant_display: {query: "false"}}}]}}
+8: {terms: {category: ["1055398"]}}
+
 
 GET product/_search
 {
