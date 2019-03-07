@@ -1,0 +1,18 @@
+python安装：https://www.cnblogs.com/kimyeee/p/7250560.html
+
+# vim ~/.bash_profile
+# .bash_profile
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+# User specific environment and startup programs
+PATH=$PATH:$HOME/bin:/usr/local/python3/bin
+export PATH
+　　按ESC，输入:wq回车退出。
+
+　　修改完记得执行行下面的命令，让上一步的修改生效：
+
+1
+# source ~/.bash_profile
+　　检查Python3及pip3是否正常可用：
