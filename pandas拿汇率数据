@@ -1,0 +1,10 @@
+import pandas_datareader as pdr 
+cny = pdr.DataReader("DEXCHUS", "fred") 
+或者，更类似于你以前有语法：
+
+from pandas_datareader import data 
+cny = data.get_data_fred("DEXCHUS") 
+的data.get_data_fred方法只返回下面，它提供第三种方式获取您的数据：
+
+# Connect to FRED report and read from connection 
+cny = data.FredReader("DEXCHUS").read() 
