@@ -1,3 +1,7 @@
+create user 'username'@'host' identified by 'password';
+GRANT ALL PRIVILEGES ON  *.* TO ‘username’@‘%’ IDENTIFIED BY 'password’；
+
+
 https://www.cnblogs.com/wanghetao/p/3806888.html
 MySQL添加用户、删除用户与授权
 MySql中添加用户,新建数据库,用户授权,删除用户,修改密码(注意每行后边都跟个;表示一个命令语句结束):
