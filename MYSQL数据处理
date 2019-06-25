@@ -1,0 +1,3 @@
+if、正则、数据提取
+select if(smallinfo REGEXP '12059: [0-9]+}',SUBSTRING_INDEX(SUBSTRING_INDEX(smallinfo,'12059: ',-1),'}',1),SUBSTRING_INDEX(SUBSTRING_INDEX(smallinfo,'12059: ',-1),',',1)) smallrank
+from smallcategory_trainasin_rank where smallinfo like '{12059:%' or smallinfo like '%, 12059:%';
