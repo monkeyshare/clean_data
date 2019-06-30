@@ -19,3 +19,7 @@ gunicorn：https://www.cnblogs.com/chnmig/p/10364168.html
 1、寻找文件：find / -name gunicorn
 2、没有设置环境变量依旧可以通过绝对路径使用命令：[root@iz8vb8h6h00o9kz home]# /usr/local/python3/bin/gunicorn myapp:app
 
+8000端口占用解决：
+https://www.cnblogs.com/hedianzhan/p/10131058.html
+查看一下占用情况：netstat -tulpn，然后kill进程
+
