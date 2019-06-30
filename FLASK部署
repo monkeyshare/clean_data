@@ -13,3 +13,9 @@ sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-cento
 　　通过yum search nginx看看是否已经添加源成功。如果成功则执行下列命令安装Nginx。
 
 sudo yum install -y nginx
+
+
+gunicorn：https://www.cnblogs.com/chnmig/p/10364168.html
+1、寻找文件：find / -name gunicorn
+2、没有设置环境变量依旧可以通过绝对路径使用命令：[root@iz8vb8h6h00o9kz home]# /usr/local/python3/bin/gunicorn myapp:app
+
