@@ -23,3 +23,37 @@ gunicorn：https://www.cnblogs.com/chnmig/p/10364168.html
 https://www.cnblogs.com/hedianzhan/p/10131058.html
 查看一下占用情况：netstat -tulpn，然后kill进程
 
+https://blog.csdn.net/qq_32198277/article/details/52432890
+增加两行main.py:
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    from werkzeug.contrib.fixers import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+    app.run()
+启动flask：gunicorn -w 4 -b 127.0.0.1:8000 入口文件名:app
+测试：curl 127.0.0.1:8000
+
+nginx配置：
+找到配置文件 find / -name nginx.conf
+修改部分配置：
+server {
+    listen 80;
+    server_name example.org; # 这是HOST机器的外部域名，用地址也行
+
+    location / {
+        proxy_pass http://127.0.0.1:8000; # 这里是指向 gunicorn host 的服务地址
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+  }
+检查是否成功：nginx －t
+重启 nginx  sudo service nginx restart
