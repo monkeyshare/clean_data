@@ -1,3 +1,6 @@
+聚合汇总贴，包含百分位：https://www.cnblogs.com/leeSmall/p/9215909.html
+
+
 bool: {filter: [{range: {price: {gte: 10}}}, {range: {price: {lte: 20}}}, {range: {rank: {gte: 100}}},…]}
 filter: [{bool: {should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]}},…]
 0: {bool: {should: [{bool: {must: [{match: {s_title: {query: "tool", operator: "and"}}}]}},…]}}
