@@ -16,3 +16,4 @@ export PATH
 1
 # source ~/.bash_profile
 　　检查Python3及pip3是否正常可用：
+nohup python -u flush.py > flush.log 2>&1 &
