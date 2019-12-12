@@ -1,2 +1,7 @@
 python操作redis
 https://segmentfault.com/a/1190000015191422
+
+启动redis：redis-server
+设置密码：config set requirepass test123
+确认密码：auth test123
+
