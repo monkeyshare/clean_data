@@ -6,3 +6,6 @@ SELECT CONCAT(table_schema,'.',table_name) AS 'Table Name', CONCAT(ROUND(table_r
 CONCAT(ROUND(data_length/(1024*1024*1024),4),'G') AS 'Data Size', CONCAT(ROUND(index_length/(1024*1024*1024),4),'G') 
 AS 'Index Size', CONCAT(ROUND((data_length+index_length)/(1024*1024*1024),4),'G') AS'Total'
 FROM information_schema.TABLES WHERE table_schema LIKE 'test';
+
+如果出现mysql当机，需要重启电脑
+shutdown -r now
