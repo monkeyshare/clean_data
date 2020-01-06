@@ -1,3 +1,8 @@
+下载软件 wget https://www.anaconda.com/distribution/#linux
+安装软件bash Anaconda3-2018.12-Linux-x86_64.sh 
+刷新环境变量source ~/.bashrc
+验证：python
+
 python安装：https://www.cnblogs.com/kimyeee/p/7250560.html
 
 # vim ~/.bash_profile
