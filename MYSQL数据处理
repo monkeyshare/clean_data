@@ -9,3 +9,11 @@ FROM information_schema.TABLES WHERE table_schema LIKE 'test';
 
 如果出现mysql当机，需要重启电脑
 shutdown -r now
+
+如何将mysql的database移出或备份？
+请先用
+mysqldump -u [user] -p [database_name] > [dump_name]
+之后再将 dump_name 这个档案复制到别台计算机，进入 mysql后 先建立一个 database_name , 然后再执行
+mysql -u [user] -p [database_name] < [dump_name]
+
+ 
