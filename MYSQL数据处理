@@ -17,3 +17,8 @@ mysqldump -u [user] -p [database_name] > [dump_name]
 mysql -u [user] -p [database_name] < [dump_name]
 
  
+mysql 连接不上：ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+重启报错：sudo mysql.server restart . ERROR! The server quit without updating PID file (/usr/local/var/mysql/**.local.pid).
+解决方法 设置pid文件的权限后重启：https://cloud.tencent.com/developer/article/1409737
+sudo chmod 755 **local.pid
+
