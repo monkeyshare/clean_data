@@ -22,3 +22,4 @@ mysql 连接不上：ERROR 2002 (HY000): Can't connect to local MySQL server thr
 解决方法 设置pid文件的权限后重启：https://cloud.tencent.com/developer/article/1409737
 sudo chmod 755 **local.pid
 
+添加更新时间alter table ** add column update_time timestamp not null DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP comment "update time"
