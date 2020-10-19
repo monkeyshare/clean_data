@@ -1,0 +1,10 @@
+ rm -rf stat/ #删除老仓库
+git clone git@*** #拉最新的仓库到本地
+
+scp -r analysis_dev/ stat/analysis_dev #将自己的文件夹复制到最新的仓库
+
+cd stat/  
+git checkout -b queena #创建本地分支并进入本地分支
+git add . 
+git commit -m "分析组提交"
+git push origin queena
