@@ -1,0 +1,14 @@
+查找本电脑支持的中文字体：
+from matplotlib.font_manager import fontManager
+import os
+ 
+fonts = [font.name for font in fontManager.ttflist if 
+         os.path.exists(font.fname) and os.stat(font.fname).st_size>1e6] 
+#os.path.exists() 判断文件、文件夹是否存在
+#os.stat(path) 用于在给定的路径上执行一个系统 stat 的调用
+for font in fonts:
+    print(font)
+
+
+设置为显示中文字体：
+plt.rcParams["font.family"] = "Songti SC"  #显示中文
