@@ -1,0 +1,11 @@
+从gensim到sklearn的格式转换
+一个很尴尬的问题是，gensim中的corpus数据格式，sklearn是无法识别的。即gensim中对向量的表示形式与sklearn要求的不符。
+在gensim中，向量是稀疏表示的。例如[(0,5),(6,3)] 意思就是说，该向量的第0个元素值为5，第6个元素值为3，其他为0.但是这种表示方式sklearn是无法识别的。sklearn的输入一般是与numpy或者scipy配套的。如果是密集矩阵，就需要输入numpy.array格式的； 如果是稀疏矩阵，则需要输入scipy.sparse.csr_matrix.由于后者可以转化成前者，而且gensim中向量本身就是稀疏表示，所以这边只讲如何将gensim中的corpus格式转化成csr_matrix.
+
+去scipy的官网去找相关文档，可以看到csr_matrix的构造有如下几种方法
+————————————————
+版权声明：本文为CSDN博主「multiangle」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u014595019/article/details/52433754/
+
+svm的一些深入探讨
+https://blog.csdn.net/u012526003/article/details/79088214
