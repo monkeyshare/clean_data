@@ -1,0 +1,43 @@
+def send_email(filename):
+    # !/usr/bin/python
+    # -*- coding: UTF-8 -*-
+
+    mail_user = "xiong@qq.com"  # 用户名
+    mail_pass = "l7^pzg#kx7fu"  # 口令
+    sender = mail_user
+    receivers = ['li@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+
+    # 创建一个带附件的实例
+    message = MIMEMultipart()
+    message['From'] = Header("熊**", 'utf-8')
+    message['To'] = Header("李**", 'utf-8')
+    subject = '1-2级类目销售数据'
+    message['Subject'] = Header(subject, 'utf-8')
+
+    # 邮件正文内容
+    message.attach(MIMEText('hi，思li：附件为上个月的统计结果，请查收并及时交付给客户，谢谢！', 'plain', 'utf-8'))
+
+    # 构造附件1，传送当前目录下的 test.txt 文件
+    att1 = MIMEText(open(filename, 'rb').read(), 'base64', 'utf-8')
+    att1["Content-Type"] = 'application/octet-stream'
+    # 这里的filename可以任意写，写什么名字，邮件中显示什么名字
+    att1["Content-Disposition"] = f'attachment; filename="{filename}"'
+    message.attach(att1)
+
+    try:
+        client = smtplib.SMTP_SSL("smtp.exmail.qq.com", port=465)
+        client.login(mail_user, mail_pass)
+        client.sendmail(sender, receivers, message.as_string())
+        client.quit()
+        print('带有各种附件的邮件发送成功！')
+
+    except smtplib.SMTPRecipientsRefused:
+        print('Recipient refused')
+    except smtplib.SMTPAuthenticationError:
+        print('Auth error')
+
+    except smtplib.SMTPSenderRefused:
+        print('Sender refused')
+
+    except smtplib.SMTPException:
+        print("else")
