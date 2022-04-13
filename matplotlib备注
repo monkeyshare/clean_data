@@ -1,3 +1,4 @@
+#设置中文字体
 查找本电脑支持的中文字体：
 from matplotlib.font_manager import fontManager
 import os
@@ -8,7 +9,17 @@ fonts = [font.name for font in fontManager.ttflist if
 #os.stat(path) 用于在给定的路径上执行一个系统 stat 的调用
 for font in fonts:
     print(font)
-
-
 设置为显示中文字体：
 plt.rcParams["font.family"] = "Songti SC"  #显示中文
+
+设置次坐标轴
+fig,ax=plt.subplots(figsize=(10,6))
+ax1=ax.twinx()
+
+设置图例位置为外边
+ax.legend(loc=[1,0])
+
+画堆积柱状图
+gg=t[t.fundType=="净值(亿元)"][["uploadTime","closedFund","openedFund","gpFund","fixedFund","zqFund","moneyMarketFund","qdiiFund","otherFund"]]
+gg.set_index("uploadTime").plot(kind="bar",stacked=True,ax=ax)
+
