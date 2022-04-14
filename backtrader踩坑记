@@ -8,4 +8,13 @@ class Addmoredata(PandasData):
 使用的时候本来的用法是 data = bt.feeds.PandasData(df) 改成data = Addmoredata(df)
 2、画图时matplotlib更新导致的缺陷
 ImportError: cannot import name 'warnings' from 'matplotlib.dates' 
+卸载掉新版matplotlib，装旧版的2.2可以解决
+然后又碰到新的问题
+Axis limits cannot be NaN or Inf
+这个原因是feed的数据字段名称没有对齐，vol改成volumn就可以了
 3、空仓时可以买入没毛病，但是卖出信号没起作用，导致self.sell()不改变self.position的持仓size数，崩溃，没解决
+4、plot出来的图片很模糊
+5、notebook里面有图，但是py里面又报错了
+'NoneType' object has no attribute 'session'
+加了一个参数变好了，控制其不在notebook里面作图吧cerebro.plot(iplot=False)
+图像质量也清晰了。
