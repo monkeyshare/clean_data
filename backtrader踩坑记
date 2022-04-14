@@ -1,0 +1,11 @@
+1、固定接受7个字段，如果需要新的指标，则需要添加字段
+这个框架很多类继承，不熟悉这个写法，开始就被搞懵了
+class Addmoredata(PandasData):
+#         lines = ('buy', 'ma_5') 依葫芦画瓢，写2个字段，报错了，智能先不管，用一个字段
+#         params = (('buy',7) ,("ma_5",8),)
+        lines = ('buy',)
+        params = (('buy',7),)
+使用的时候本来的用法是 data = bt.feeds.PandasData(df) 改成data = Addmoredata(df)
+2、画图时matplotlib更新导致的缺陷
+ImportError: cannot import name 'warnings' from 'matplotlib.dates' 
+3、空仓时可以买入没毛病，但是卖出信号没起作用，导致self.sell()不改变self.position的持仓size数，崩溃，没解决
