@@ -1,6 +1,10 @@
 1、固定接受7个字段，如果需要新的指标，则需要添加字段
+single positional indexer is out-of-bounds
+
+
 这个框架很多类继承，不熟悉这个写法，开始就被搞懵了
 class Addmoredata(PandasData):
+        linesoverride = True  # discard usual OHLC structure，这行不加也会报错
 #         lines = ('buy', 'ma_5') 依葫芦画瓢，写2个字段，报错了，智能先不管，用一个字段
 #         params = (('buy',7) ,("ma_5",8),)
         lines = ('buy',)
