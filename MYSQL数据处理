@@ -23,3 +23,16 @@ mysql 连接不上：ERROR 2002 (HY000): Can't connect to local MySQL server thr
 sudo chmod 755 **local.pid
 
 添加更新时间alter table ** add column update_time timestamp not null DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP comment "update time"
+
+插入数据的时候，有些字段会存在单引号的情况，插入数据时就会报错
+举个例子'Zhejiang Int'l Group Co.,Ltd','ytjt'
+手动转换单引号，一来时麻烦，对于批量灵活处理数据很不友好，另外存储数据时会改变原有数据的结构。
+这里给出的解决方案pymysql自带的消除这类影响的函数
+from pymysql.converters import escape_string
+sq = "insert into tablename (a,b,c) values('%s','%s','%s')"
+cur = conn.cursor()
+for d in df:
+    d = [escape_string(i) if isinstance(i,str) else i for i in d ]
+    cur.execute(sq%tuple(d))
+conn.commit()
+cur.close()
