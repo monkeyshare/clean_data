@@ -14,3 +14,9 @@ git log #查看提交记录
 git git reset --soft bc07480025bca168e2136064d795f2bb56eab999 #回撤到**版本
 
 git push origin master --force
+
+更新密钥
+生成密钥
+ssh-keygen -t rsa -C "123@23.com"
+然后复制到git仓库里面
+查看密钥cd ~/.ssh
