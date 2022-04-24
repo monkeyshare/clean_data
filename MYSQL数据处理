@@ -36,3 +36,11 @@ for d in df:
     cur.execute(sq%tuple(d))
 conn.commit()
 cur.close()
+
+获取每日每个行业头部pe的公司；查询最大（小）值所在的前N行https://blog.csdn.net/liangwenrong/article/details/118307048
+use sdb_stock;
+SELECT * FROM bak_basic where industry="纺织" ;
+select * from bak_basic a
+where industry="纺织"  and 2>(select count(1) from bak_basic b
+where b.trade_date=a.trade_date and b.industry=a.industry
+and a.pe<b.pe) order by trade_date desc;
