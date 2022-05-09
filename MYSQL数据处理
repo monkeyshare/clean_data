@@ -1,7 +1,23 @@
-mysql -u root -p无法启动问题：
+--mysql -u root -p无法启动问题：
 1. 首先查看系统的环境变量可以直接输入export,这样可以查看到所有的系统环境变量,要能够直接输入mysql命令,mysql的命令的环境变量需要放到PATH中,如下可以看到,
 我系统中PATH这个变量里面是没有mysql的环境变量的, 所以输入mysql会提示找不到该命令.
 2.设置mysql的环境变量 PATH=$PATH:/usr/local/mysql/bin
+
+--tableau连接mysql报错问题
+登陆MySQL（记得添加环境变量）
+   mysql -u root -p
+2. 修改账户密码加密规则并更新用户密码
+
+   ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER;   #修改加密规则 
+
+   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';   #更新一下用户的密码 
+
+3. 刷新权限并重置密码
+
+   FLUSH PRIVILEGES;   #刷新权限 
+————————————————
+版权声明：本文为CSDN博主「爱码哥」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/grl18840839630/article/details/120506994
 
 
 if、正则、数据提取
