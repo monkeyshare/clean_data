@@ -1,3 +1,9 @@
+mysql -u root -p无法启动问题：
+1. 首先查看系统的环境变量可以直接输入export,这样可以查看到所有的系统环境变量,要能够直接输入mysql命令,mysql的命令的环境变量需要放到PATH中,如下可以看到,
+我系统中PATH这个变量里面是没有mysql的环境变量的, 所以输入mysql会提示找不到该命令.
+2.设置mysql的环境变量 PATH=$PATH:/usr/local/mysql/bin
+
+
 if、正则、数据提取
 select if(smallinfo REGEXP '12059: [0-9]+}',SUBSTRING_INDEX(SUBSTRING_INDEX(smallinfo,'12059: ',-1),'}',1),SUBSTRING_INDEX(SUBSTRING_INDEX(smallinfo,'12059: ',-1),',',1)) smallrank
 from smallcategory_trainasin_rank where smallinfo like '{12059:%' or smallinfo like '%, 12059:%';
