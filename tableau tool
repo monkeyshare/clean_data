@@ -1,0 +1,1 @@
+sumif函数：{FIXED [Mon]:SUM(if [Earn]>0 then 1 end)/COUNT([Earn])}
