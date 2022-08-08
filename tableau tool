@@ -1,3 +1,13 @@
 sumif函数：{FIXED [Mon]:SUM(if [Earn]>0 then 1 end)/COUNT([Earn])}
 
 设置单位亿：  #"."##,,亿;-#"."##,,亿
+
+[Name]+IF [涨停连板数]>0 THEN "("+
+str([涨停连板数])+")"
+ ELSE "" END
+ 
+ [股票名称]+IF [连板次数]>0 THEN "("+
+str([连板次数])+")"
+ ELSE "" END
+ 
+ [股票名称]+","+[行业]
