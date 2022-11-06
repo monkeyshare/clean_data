@@ -1,5 +1,5 @@
 create user 'username'@'host' identified by 'password';
-GRANT ALL PRIVILEGES ON  *.* TO ‘username’@‘%’ IDENTIFIED BY 'password’；
+GRANT ALL PRIVILEGES ON  *.* TO ‘username’@‘%’ ；
 
 
 https://www.cnblogs.com/wanghetao/p/3806888.html
