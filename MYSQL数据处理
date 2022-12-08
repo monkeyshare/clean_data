@@ -66,3 +66,12 @@ select * from bak_basic a
 where industry="纺织"  and 2>(select count(1) from bak_basic b
 where b.trade_date=a.trade_date and b.industry=a.industry
 and a.pe<b.pe) order by trade_date desc;
+
+
+select concat(round(sum(DATA_LENGTH/1024/1024/1024),2),'G') 数据,
+concat(round(sum(index_length/1024/1024/1024),2),'G')  索引
+from tables ;
+
+SELECT file_name,concat(TOTAL_EXTENTS/1024,'GB') as 'FileSize' FROM INFORMATION_SCHEMA.FILES order by TOTAL_EXTENTS DESC
+
+SELECT  sum(TOTAL_EXTENTS/1024)  FROM INFORMATION_SCHEMA.FILES order by TOTAL_EXTENTS DESC
